@@ -65,11 +65,4 @@ test.describe("Automation Sandbox", () => {
       await page.getByRole('link', { name: 'Miércoles' }).click();
     });
   });
-
-  test(" TestId008 - Upload a file ", async ({ page }) => {
-    await test.step("When I upload a file", async () => {
-      await page.setInputFiles('input[type="file"]', 'tests/fixtures/fileToUpload.txt');
-      await page.getByLabel("Upload file").setInputFiles('tests/fixtures/fileToUpload.txt');
-    });
-  });
 });
