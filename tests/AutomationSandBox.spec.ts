@@ -30,13 +30,11 @@ test.describe("Automation Sandbox", () => {
 
   test(" TestId004 - Select a Checkbox ", async ({ page }) => {
     await test.step("When I select the checkbox", async () => {
-      await page.getByRole("checkbox", { name: "Pizza 🍕" }).check();
+      await page.getByRole('checkbox', { name: 'Pizza 🍕' }).check();
     });
 
     await test.step("Then I should see the checkbox selected", async () => {
-      await expect(
-        page.getByRole("checkbox", { name: "Pizza 🍕" })
-      ).toBeChecked();
+      await expect(page.getByRole('checkbox', { name: 'Pizza 🍕' }), 'NO esta seleccionado').toBeChecked();
     });
   });
 
