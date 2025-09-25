@@ -2,9 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Automation Sandbox", () => {
   test.beforeEach("Goto Automation Sandbox Page", async ({ page }) => {
-    await page.goto(
-      "https://thefreerangetester.github.io/sandbox-automation-testing/"
-    );
+    await page.goto(" ");
   });
 
   let textToCheck: string = "Hola Mundo 👻";
