@@ -7,6 +7,8 @@ test.describe("Automation Sandbox", () => {
     );
   });
 
+  let textToCheck: string = "Hola Mundo 👻";
+
   test(" TestId002 - Click on ID dinamic button ", async ({ page }) => {
     await test.step("When I click on the ID dinamic button", async () => {
       await page
@@ -14,9 +16,7 @@ test.describe("Automation Sandbox", () => {
         .click();
     });
     await test.step("Then I should see the hidden element", async () => {
-      await expect(page.locator("#hidden-element")).toContainText(
-        "OMG, aparezco después de 3 segundos de haber hecho click en el botón 👻."
-      );
+      await expect(page.getByText('OMG, aparezco después de 3')).toBeVisible();
     });
   });
 
@@ -24,7 +24,13 @@ test.describe("Automation Sandbox", () => {
     await test.step("When I fill the text input", async () => {
       await page
         .getByRole("textbox", { name: "Un aburrido texto" })
-        .fill("Hola Mundo 👻");
+        .fill(textToCheck);
+    });
+
+    await test.step("Then I should see the text input filled", async () => {
+      await expect(
+        page.getByRole("textbox", { name: "Un aburrido texto" })
+      ).toHaveValue(textToCheck);
     });
   });
 
@@ -44,11 +50,20 @@ test.describe("Automation Sandbox", () => {
     });
 
     await test.step("Then I should see the radio button selected", async () => {
-      await expect(page.getByRole("radio", { name: "No" })).toBeChecked();
+      await expect(page.getByRole("radio", { name: "No" }), 'Radio button is not checked').toBeChecked();
     });
   });
 
   test(" TestId006 - Select an option from the sports dropdown ", async ({ page }) => {
+
+    await test.step("Validating the expected dropdown options", async () => {
+      const sports: string[] = ["Fútbol", "Basketball", "Tennis"];
+      for (const sport of sports) {
+        const option = page.getByLabel("Dropdown").getByRole('option', { name: sport });
+        await expect(option, `Option ${sport} not found in the dropdown`).toHaveCount(1);
+      }
+      
+    })
     await test.step("When I select an option from the dropdown", async () => {
       await page.getByLabel("Dropdown").selectOption("Basketball");
     });
