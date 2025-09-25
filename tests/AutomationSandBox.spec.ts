@@ -78,4 +78,29 @@ test.describe("Automation Sandbox", () => {
       await page.getByRole('link', { name: 'Miércoles' }).click();
     });
   });
+
+  test(" TestId008 - Validating content of static table elements ", async ({ page }) => {
+    await test.step("I can validate the content of Name column", async () => {
+      const names: string[] = ["Messi", "Ronaldo", "Mbappe"];
+      const nameCells = await page.locator('h2:has-text("Tabla estática") + table tbody tr td:nth-child(2)').allTextContents();
+      expect(nameCells).toEqual(names);
+
+    });
+  });
+
+  test(" TestId009 - Validating content of dynamic table elements ", async ({ page }) => {
+    await test.step("I can validate the dynamic content", async () => {
+      // Get initial values
+      const initialValues = await page.locator('h2:has-text("Tabla dinámica") + table tbody tr td').allTextContents();
+      console.log(initialValues);
+      // Reload the page to get new values
+      await page.reload();
+      // Get new values
+      const newValues = await page.locator('h2:has-text("Tabla dinámica") + table tbody tr td').allTextContents();
+      console.log(newValues);
+      // Compare the two sets of values
+      expect(initialValues).not.toEqual(newValues);
+
+    });
+  });
 });
