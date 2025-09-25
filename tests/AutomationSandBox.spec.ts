@@ -103,4 +103,32 @@ test.describe("Automation Sandbox", () => {
 
     });
   });
+
+  test(" TestId010 - Examples of Soft assertions ", async ({ page }) => {
+    await test.step("validate checkboxes elements", async () => {
+      await expect.soft(page.getByText('Pizza 🍕'), 'Not found the element').toBeVisible();
+      await expect.soft(page.getByText('Helado 🍧'), 'Not found the element' ).toBeVisible();
+      await expect.soft(page.getByText('Hamburguesa 🍔'), 'Not found the element').toBeVisible();
+      await expect.soft(page.getByText('Pasta 🍝'), 'Not found the element').toBeVisible();
+      await expect.soft(page.getByText('Torta 🍰'), 'Not found the element').toBeVisible();
+
+    });
+  });
+
+  test(" TestId011 - Validate popup message ", async ({ page  }) => {
+    await test.step("When I click on the Popup button", async () => {
+      await page.getByRole('button', { name: 'Mostrar popup' }).click();
+    });
+    await test.step("Then I should see the popup message", async () => {
+      await expect(page.getByText('¿Viste? ¡Apareció un Pop-up!')).toHaveText('¿Viste? ¡Apareció un Pop-up!');
+    });
+
+    await test.step("When I close the popup", async () => {
+      await page.getByRole('button', { name: 'Cerrar' }).click();
+    });
+
+    await test.step("Then I should not see the popup message", async () => {
+      await expect(page.getByText('¿Viste? ¡Apareció un Pop-up!')).not.toBeVisible();
+    });
+  });
 });
