@@ -34,16 +34,6 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: "Desktop",
-      testMatch: "/tests/AutomationSandBox.spec.ts",
-      use: { ...devices["Desktop Chrome"] },
-    },
-    {
-      name: "iPhone",
-      testMatch: "/tests/AutomationSandBox.spec.ts",
-      use: { ...devices["iPhone 15 Pro Max"] },
-    },
 
     {
       name: "chromium",
