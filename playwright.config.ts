@@ -40,6 +40,18 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
 
+    {
+      name: 'API Tests',
+      testMatch: 'APITest/**/*',
+      use: {
+        baseURL: 'https://api.github.com',
+        extraHTTPHeaders: {
+          'Accept': 'application/vnd.github.v3+json',
+          'Authorization': `Token ${process.env.USER_TOKEN}`,
+        }
+      }
+    }
+
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
