@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
 
 const REPO = 'Playwright_Freerange';
-const USER =  'andrestesterqa';
+const OWNER =  'andrestesterqa';
 
-test('API Test - Create an issuein a repository', async ({ request }) => {
-    const newIssue = await request.post(`/repos/${USER}/${REPO}/issues`, {
+test('API Test - Create an issue in a repository', async ({ request }) => {
+    const newIssue = await request.post(`/repos/${OWNER
+        
+    }/${REPO}/issues`, {
         data: {
             title: '[Bug] Issue created by Playwright',
             body: 'This is the description of the issue',}
