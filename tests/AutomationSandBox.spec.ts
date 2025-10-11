@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { SanboxPage } from "./pages/sandboxPage";
 
 test.describe("Automation Sandbox", () => {
   test.beforeEach("Goto Automation Sandbox Page", async ({ page }) => {
@@ -9,39 +10,36 @@ test.describe("Automation Sandbox", () => {
 
   test(" TestId001 - Click on ID dinamic button ", async ({ page }) => {
     await test.step("When I click on the ID dinamic button", async () => {
-      await page
-        .getByRole("button", { name: "Hacé click para generar un ID" })
-        .click();
+      const sandboxPage = new SanboxPage(page);
+      await sandboxPage.clickOnGenerateId();
     });
     await test.step("Then I should see the hidden element", async () => {
-      await expect(page.getByText("OMG, aparezco después de 3")).toBeVisible();
+      const sandboxPage = new SanboxPage(page);
+      await sandboxPage.checkTextIdDynamic();
     });
   });
 
   test(" TestId002 - Filled text input ", async ({ page }) => {
     await test.step("When I fill the text input", async () => {
-      await page
-        .getByRole("textbox", { name: "Un aburrido texto" })
-        .fill(textToCheck);
+      const sandboxPage = new SanboxPage(page);
+      await sandboxPage.fillTextInput(textToCheck);
     });
 
     await test.step("Then I should see the text input filled", async () => {
-      await expect(
-        page.getByRole("textbox", { name: "Un aburrido texto" })
-      ).toHaveValue(textToCheck);
+      const sandboxPage = new SanboxPage(page);
+      await expect(sandboxPage.textBoxInput).toHaveValue(textToCheck);
     });
   });
 
   test(" TestId003 - Select a Checkbox ", async ({ page }) => {
     await test.step("When I select the checkbox", async () => {
-      await page.getByRole("checkbox", { name: "Pizza 🍕" }).check();
+      const sandboxPage = new SanboxPage(page);
+      await sandboxPage.selectCheckBox();
     });
 
     await test.step("Then I should see the checkbox selected", async () => {
-      await expect(
-        page.getByRole("checkbox", { name: "Pizza 🍕" }),
-        "NO esta seleccionado"
-      ).toBeChecked();
+      const sandboxPage = new SanboxPage(page);
+      await expect(sandboxPage.checkBox).toBeChecked();
     });
   });
 

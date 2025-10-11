@@ -2,7 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, 'tests/APITest/.env') });
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * Read environment variables from file.
@@ -51,7 +51,7 @@ export default defineConfig({
         baseURL: 'https://api.github.com',
         extraHTTPHeaders: {
           'Accept': 'application/vnd.github.v3+json',
-          'Authorization': `token ${process.env.API_TOKEN}`,
+          'Authorization': `${process.env.API_TOKEN}`,
         }
       }
     }
