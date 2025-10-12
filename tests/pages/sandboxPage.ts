@@ -1,4 +1,4 @@
-import { type Page, type Locator, expect } from "@playwright/test";
+import { type Page, type  Locator, expect } from "@playwright/test";
 
 export class SanboxPage {
   readonly page: Page;
@@ -25,7 +25,7 @@ export class SanboxPage {
   }
 
   async fillTextInput(textToCheck: string) {
-    await expect(this.textBoxInput).toBeVisible();
+    await expect(this.textBoxInput, 'Text input is not visible').toBeVisible();
     await this.textBoxInput.fill(textToCheck);
   }
 
